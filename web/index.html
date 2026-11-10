@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Production status board demo</title>
+<meta name="description" content="A demo shop-floor status board replaying a synthetic 8-hour shift. All data is made up.">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="board.css">
+<script src="board.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap"><span class="brand">Production status board <span>demo</span></span></div>
+</header>
+
+<main id="main">
+  <section>
+    <div class="wrap">
+      <div class="intro">
+        <h1>Production status board</h1>
+        <p class="lead">A shop-floor board that shows, line by line, what is running, what is held and what is next. This demo replays one made-up 8-hour shift. Every order, product and number is synthetic.</p>
+      </div>
+
+      <div class="board-bar">
+        <p class="clock" id="clock">06:00</p>
+        <div class="controls">
+          <button type="button" id="play">Play</button>
+          <button type="button" id="restart">Restart</button>
+          <label for="speed">Speed</label>
+          <select id="speed">
+            <option value="2">Slow</option>
+            <option value="4" selected>Normal</option>
+            <option value="10">Fast</option>
+          </select>
+          <a id="kiosk" href="?kiosk=1">Kiosk view</a>
+        </div>
+      </div>
+
+      <div class="kpis" id="kpis"></div>
+      <h2 class="sr-only">Production lines</h2>
+      <div class="lines" id="lines"><p>Loading the demo&hellip;</p></div>
+      <noscript><p>This demo needs JavaScript to replay the shift.</p></noscript>
+    </div>
+  </section>
+</main>
+</body>
+</html>

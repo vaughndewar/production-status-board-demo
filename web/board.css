@@ -1,0 +1,59 @@
+/* Production status board demo. Uses tokens from /assets/style.css. */
+:root {
+  --st-queued: #5b6676;
+  --st-run: #1d6b3a;
+  --st-hold: #b45309;
+  --st-done: #1d4ed8;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --st-queued: #9aa6b6;
+    --st-run: #5fd08a;
+    --st-hold: #f0a95b;
+    --st-done: #8ab4ff;
+  }
+}
+.board-bar { display: flex; flex-wrap: wrap; gap: 1rem 2rem; align-items: center; justify-content: space-between; margin: 1.5rem 0 1rem; }
+.clock { font-size: 2rem; font-weight: 800; font-variant-numeric: tabular-nums; margin: 0; }
+.clock small { font-size: .9rem; font-weight: 400; color: var(--muted); margin-left: .5rem; }
+.controls { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+.controls button, .controls select { font: inherit; padding: .45rem .9rem; border-radius: 8px; border: 1px solid var(--muted); background: var(--bg); color: var(--text); cursor: pointer; }
+.controls label { color: var(--muted); font-size: .9rem; }
+
+.kpis { display: grid; grid-template-columns: repeat(2, 1fr); gap: .75rem; margin-bottom: 1.25rem; }
+@media (min-width: 46rem) { .kpis { grid-template-columns: repeat(4, 1fr); } }
+.kpi { border: 1px solid var(--border); border-radius: var(--radius); padding: .8rem 1rem; background: var(--bg); }
+.kpi b { display: block; font-size: 1.8rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.kpi span { color: var(--muted); font-size: .9rem; }
+
+.lines { display: grid; gap: 1rem; }
+@media (min-width: 46rem) { .lines { grid-template-columns: repeat(2, 1fr); } }
+.line { border: 1px solid var(--border); border-left-width: 6px; border-radius: var(--radius); padding: 1rem 1.1rem; background: var(--bg); }
+.line h3 { display: flex; justify-content: space-between; gap: .5rem; margin-bottom: .5rem; }
+.line[data-status="in_production"] { border-left-color: var(--st-run); }
+.line[data-status="quality_hold"] { border-left-color: var(--st-hold); }
+.line[data-status="complete"] { border-left-color: var(--st-done); }
+.line[data-status="queued"], .line[data-status="idle"] { border-left-color: var(--st-queued); }
+.badge { font-size: .85rem; font-weight: 700; white-space: nowrap; }
+[data-status="in_production"] .badge { color: var(--st-run); }
+[data-status="quality_hold"] .badge { color: var(--st-hold); }
+[data-status="complete"] .badge { color: var(--st-done); }
+[data-status="queued"] .badge, [data-status="idle"] .badge { color: var(--st-queued); }
+.wo { margin: 0 0 .5rem; }
+.wo strong { font-variant-numeric: tabular-nums; }
+.meta { color: var(--muted); font-size: .92rem; margin: 0 0 .5rem; }
+progress { width: 100%; height: .9rem; accent-color: var(--accent); }
+.next { margin: .75rem 0 0; padding: 0; list-style: none; color: var(--muted); font-size: .92rem; }
+
+body.kiosk .site-header, body.kiosk .site-footer, body.kiosk .intro, body.kiosk .explain, body.kiosk .cta-band { display: none; }
+body.kiosk { font-size: 1.2rem; }
+body.kiosk .clock { font-size: 2.8rem; }
+body.kiosk .kpi b { font-size: 2.6rem; }
+
+/* Reserve space so the board does not jump when the data loads (layout shift). */
+.kpis { min-height: 10.5rem; }
+.lines { min-height: 62rem; }
+@media (min-width: 46rem) {
+  .kpis { min-height: 5.6rem; }
+  .lines { min-height: 30rem; }
+}
